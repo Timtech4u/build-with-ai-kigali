@@ -2,55 +2,93 @@
 marp: true
 theme: default
 paginate: true
-backgroundColor: #ffffff
-color: #202124
 style: |
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
   section {
-    font-family: 'Google Sans', 'Segoe UI', sans-serif;
-    padding: 40px 60px;
+    font-family: 'Inter', 'Google Sans', 'Segoe UI', sans-serif;
+    padding: 50px 70px;
+    background: #ffffff;
+    color: #1a1a2e;
   }
   h1 {
     color: #1a73e8;
     font-size: 2.2em;
-    margin-bottom: 0.3em;
+    font-weight: 900;
+    margin-bottom: 0.2em;
+    letter-spacing: -0.02em;
   }
   h2 {
-    color: #1a73e8;
-    font-size: 1.6em;
+    color: #174ea6;
+    font-size: 1.5em;
+    font-weight: 700;
   }
   h3 {
-    color: #137333;
-    font-size: 1.2em;
+    color: #0d652d;
+    font-size: 1.1em;
+    font-weight: 700;
   }
   code {
-    background: #f1f3f4;
-    color: #37474f;
-    padding: 2px 6px;
-    border-radius: 4px;
+    background: #e8f0fe;
+    color: #174ea6;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
   }
   pre {
     background: #f8f9fa;
     border: 1px solid #dadce0;
-    border-radius: 8px;
-    font-size: 0.75em;
+    border-radius: 12px;
+    font-size: 0.7em;
+    padding: 18px !important;
   }
-  a { color: #1a73e8; }
-  strong { color: #d93025; }
+  pre code {
+    background: transparent;
+    padding: 0;
+    font-weight: 400;
+  }
+  a { color: #1a73e8; text-decoration: none; font-weight: 600; }
+  strong { color: #1a73e8; font-weight: 700; }
   em { color: #5f6368; font-style: normal; }
-  table { font-size: 0.82em; width: 100%; }
-  th { background: #e8f0fe; color: #1a73e8; }
-  td { padding: 8px 12px; }
+  table {
+    font-size: 0.8em;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  th {
+    background: #1a73e8;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  td {
+    padding: 8px 14px;
+    border-bottom: 1px solid #e8eaed;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f8f9fa; }
   blockquote {
-    border-left: 4px solid #1a73e8;
+    border-left: 5px solid #1a73e8;
     background: #e8f0fe;
-    padding: 12px 20px;
+    padding: 14px 22px;
     margin: 16px 0;
-    border-radius: 0 8px 8px 0;
-    font-size: 1.1em;
+    border-radius: 0 12px 12px 0;
+    font-size: 1.05em;
   }
   blockquote p { margin: 0; }
-  .small { font-size: 0.7em; color: #5f6368; }
+  img {
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  }
 ---
+
+<!-- _backgroundImage: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 50%, #c6f6d5 100%) -->
+<!-- _paginate: false -->
 
 # Building Personalized AI Agents
 # with Gemini, ADK, and MCP
@@ -63,17 +101,29 @@ Google Developer Expert — Cloud
 
 ---
 
+# Agenda
+
+| # | Topic | Time |
+|---|-------|------|
+| 1 | What are personalized agents? | 5 min |
+| 2 | Google ADK overview | 10 min |
+| 3 | Build your first agent (code) | 10 min |
+| 4 | Custom tools | 10 min |
+| 5 | Chrome CDP — browser control | 15 min |
+| 6 | MCP & integrations | 5 min |
+| 7 | Deployment | 5 min |
+| 8 | Exercises & Q&A | remaining |
+
+---
+
 # What if your AI assistant...
 
-Knew **your browser tabs**?
+- Knew **your browser tabs**?
+- Could **click buttons** and **fill forms** for you?
+- Could **search the web** with your context?
+- Could **remember** your preferences across sessions?
 
-Could **click buttons** and **fill forms** for you?
-
-Could **search the web** with your context?
-
-Could **remember** your preferences across sessions?
-
-Today, you'll build exactly that — in **under 30 minutes**.
+Today, you'll build exactly that.
 
 ---
 
@@ -87,58 +137,73 @@ Today, you'll build exactly that — in **under 30 minutes**.
 | 2 | An agent that controls your browser | **ADK + Chrome CDP** |
 | 3 | Deploy your agent | **One command** |
 
-All **free**. All **open source**. No credit card.
+All **free**. All **open source**. No credit card needed.
 
 ---
 
-# What Makes an Agent "Personalized"?
+# Chatbot vs. Personalized Agent
 
-A chatbot gives **generic** answers.
+### A chatbot gives generic answers
 
-A personalized agent knows **your context**:
+You ask: *"What's a good restaurant?"*
+It responds with a generic list from training data.
 
-> Your tools. Your data. Your browser. Your preferences.
+### A personalized agent knows YOUR context
 
-### How ADK makes this possible:
+You ask: *"What's a good restaurant?"*
+It checks your **location**, your **calendar** (are you free tonight?),
+your **dietary preferences**, and gives you a real answer.
+
+---
+
+# How ADK Makes This Possible
 
 - **Custom tools** — wrap any Python function
-- **Memory** — remembers across sessions
+- **Sessions** — remembers within conversations
 - **MCP** — connects to your existing tools
 - **Chrome CDP** — sees and controls your real browser
 
+> Your tools. Your data. Your browser. Your preferences.
+
 ---
+
+<!-- _backgroundImage: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%) -->
 
 # Meet Google ADK
 
 **Agent Development Kit** — the complete toolkit for AI agents
 
-| | |
-|---|---|
+---
+
+# ADK at a Glance
+
+| Feature | Description |
+|---------|-------------|
 | **Code-first** | Agents are Python objects, not prompt chains |
 | **Visual Builder** | No-code drag-and-drop creation |
 | **50+ integrations** | Google Search, GitHub, Stripe, BigQuery... |
 | **MCP support** | Connect any tool, consume or expose |
-| **Memory** | Short-term sessions + long-term recall |
+| **Sessions** | Persistent conversations with memory |
 | **v1.26** | Production-stable, used at scale |
 
 ```bash
 pip install google-adk
 ```
 
-*Python, TypeScript, Java — open source*
+*Available in Python, TypeScript, and Java — fully open source*
 
 ---
 
 # ADK vs. The Rest
 
-| | ADK | LangChain | CrewAI |
-|---|:---:|:---------:|:------:|
-| Visual Builder | Yes | — | — |
-| Free Gemini access | Yes | — | — |
-| Browser control | Yes | — | — |
-| MCP (bidirectional) | Yes | Partial | — |
-| Agent-to-Agent (A2A) | Yes | — | — |
-| Built-in Web UI | Yes | — | — |
+| Feature | ADK | LangChain | CrewAI |
+|---------|:---:|:---------:|:------:|
+| Visual Builder | **Yes** | — | — |
+| Free Gemini access | **Yes** | — | — |
+| Browser control | **Yes** | — | — |
+| MCP (bidirectional) | **Yes** | Partial | — |
+| Agent-to-Agent (A2A) | **Yes** | — | — |
+| Built-in Web UI | **Yes** | — | — |
 
 **ADK is a complete platform, not just a library.**
 
@@ -162,22 +227,27 @@ Go to **aistudio.google.com/apikey** — sign in with Gmail, create key.
 export GOOGLE_API_KEY="your_key_here"
 ```
 
-### Step 4: Verify
+---
+
+# Verify Your Setup
+
+### Step 4: Launch the Visual Builder
 
 ```bash
-adk web --port 8000    # Opens the Visual Builder
+adk web --port 8000
 ```
+
+Open **http://localhost:8000** in your browser.
+
+If you see the ADK interface — you're ready!
 
 ---
 
 # Visual Builder — Zero Code
 
-Launch it:
 ```bash
 adk web --port 8000
 ```
-
-Then in your browser:
 
 1. Click **+** to create an agent
 2. Pick **Gemini 3 Flash** as the model
@@ -185,7 +255,7 @@ Then in your browser:
 4. Add tools from the catalog
 5. Test it live in the chat panel
 
-![w:700](img/adk-web-ui.png)
+![w:600](img/adk-web-ui.png)
 
 ---
 
@@ -207,17 +277,42 @@ root_agent = Agent(
 )
 ```
 
+---
+
+# Run Your Agent
+
+### File structure
+
+```
+kigali_agent/
+  __init__.py     # from . import agent
+  agent.py        # The code from previous slide
+  .env            # GOOGLE_API_KEY=your_key
+```
+
+### Run it
+
 ```bash
 adk run kigali_agent
 ```
 
-*Ask it: "What's the mobile money market size in Rwanda?"*
+### Try these prompts:
+- *"What is the population of Kigali?"*
+- *"What's the mobile money market size in Rwanda?"*
+- *"Who are the top tech companies in Kigali?"*
 
 ---
 
-# Make It Personal — Custom Tools
+<!-- _backgroundImage: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%) -->
 
-Any Python function becomes a tool. ADK reads the docstring automatically.
+# Custom Tools
+## Make your agent truly personal
+
+---
+
+# Any Python Function = A Tool
+
+ADK reads the **docstring** and **type hints** automatically.
 
 ```python
 def convert_currency(amount: float, from_cur: str, to_cur: str) -> dict:
@@ -238,7 +333,49 @@ tools=[google_search, convert_currency]
 
 ---
 
-<!-- _backgroundColor: #e8f0fe -->
+# Another Custom Tool Example
+
+```python
+def calculate_business_metrics(
+    revenue: float, costs: float, num_customers: int
+) -> dict:
+    """Calculate key business metrics from basic inputs."""
+    profit = revenue - costs
+    margin = (profit / revenue * 100) if revenue > 0 else 0
+    rpc = revenue / num_customers if num_customers > 0 else 0
+    health = "Healthy" if margin > 20 else "Needs attention"
+    return {
+        "profit": round(profit, 2),
+        "margin_percent": round(margin, 1),
+        "revenue_per_customer": round(rpc, 2),
+        "health": health,
+    }
+```
+
+*"I have revenue of 50000 USD, costs of 35000, and 200 customers. How's my business?"*
+
+---
+
+# Rules for Custom Tools
+
+1. Use **type hints** for all parameters
+2. Write a **clear docstring** — ADK uses it to decide when to call the tool
+3. Return a **dict** — ADK converts it for the model
+4. Keep functions **simple and focused** — one tool = one job
+
+```python
+# The agent decides WHEN to call each tool
+root_agent = Agent(
+    name="kigali_ai",
+    model="gemini-3-flash-preview",
+    instruction="You are a business assistant for Kigali entrepreneurs.",
+    tools=[google_search, convert_currency, calculate_business_metrics],
+)
+```
+
+---
+
+<!-- _backgroundImage: linear-gradient(135deg, #e8f0fe 0%, #c6f6d5 100%) -->
 
 # The Highlight
 
@@ -259,17 +396,27 @@ Every Chrome browser. Already installed. Free.
 google-chrome --remote-debugging-port=9222
 ```
 
-Now any program can:
+Your AI agent can now control Chrome programmatically.
+
+---
+
+# What Can CDP Do?
 
 | Action | How |
 |--------|-----|
 | List open tabs | `GET /json/list` |
-| Open a new tab | `PUT /json/new?https://google.com` |
+| Open a new tab | `PUT /json/new?url` |
 | Run JavaScript | WebSocket + `Runtime.evaluate` |
 | Take screenshots | WebSocket + `Page.captureScreenshot` |
 | Click elements | WebSocket + JS injection |
 
-![w:600](img/cdp-json-list.png)
+---
+
+# CDP in Action
+
+Just visit `http://localhost:9222/json/list` and you get all your tabs as JSON:
+
+![w:750](img/cdp-json-list.png)
 
 ---
 
@@ -284,13 +431,27 @@ Your agent generates code **blindly** — it can't see the result.
 ### With CDP:
 Your agent can **see the page**, **interact with it**, and **verify** what happened.
 
-**Closed-loop**: Generate → Execute → Observe → Fix → Repeat
+---
+
+# The Closed Loop
+
+```
+Generate → Execute → Observe → Fix → Repeat
+```
+
+This is what makes browser agents powerful:
+
+1. Agent decides to open a URL
+2. Chrome actually opens it
+3. Agent reads what's on the page
+4. Agent decides the next action based on what it sees
+5. Repeat until the task is done
 
 Google launched **Chrome DevTools MCP** — an official MCP server with **29 browser tools**. This is the direction Google is investing in.
 
 ---
 
-# Build a Browser Agent
+# Browser Agent — The Code
 
 ```python
 root_agent = Agent(
@@ -308,47 +469,82 @@ root_agent = Agent(
 )
 ```
 
-Each tool is a simple Python function that talks to Chrome over CDP.
-
-**Full code in the repo** — `code/browser_agent/agent.py`
+Each tool is a Python function that talks to Chrome over CDP.
 
 ---
 
-# How It Works
+# How the Browser Agent Works
 
 ```
 You: "Open gdg.community.dev and find upcoming events"
 
-   ┌─────────────────────────────┐
-   │   ADK Agent (Gemini 3)      │
-   │   Decides which tools to    │
-   │   call and in what order    │
-   └──────────┬──────────────────┘
-              │
-   ┌──────────▼──────────────────┐
-   │  1. open_url(gdg.community) │──► Chrome opens new tab
-   │  2. get_page_text()         │──► Reads the page
-   │  3. click_element(".events")│──► Clicks events link
-   │  4. get_page_text()         │──► Reads event list
-   └─────────────────────────────┘
-              │
-   ┌──────────▼──────────────────┐
-   │  "Here are 3 upcoming       │
-   │   events in Kigali..."      │
-   └─────────────────────────────┘
+   Agent (Gemini)
+      │
+      ├── 1. open_url(gdg.community.dev)
+      │      └── Chrome opens new tab
+      │
+      ├── 2. get_page_text()
+      │      └── Reads the page content
+      │
+      ├── 3. click_element(".events")
+      │      └── Clicks the events link
+      │
+      └── 4. get_page_text()
+             └── Reads the event list
+
+   "Here are 3 upcoming events in Kigali..."
 ```
 
 **Your real Chrome. Your cookies. Your logged-in sessions.**
 
 ---
 
+# Try the Browser Agent — Setup
+
+### Start Chrome with CDP:
+
+```bash
+# macOS
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --remote-debugging-port=9222
+
+# Linux
+google-chrome --remote-debugging-port=9222
+```
+
+### Run the agent:
+
+```bash
+cd code/browser_agent
+adk run browser_agent
+```
+
+---
+
+# Try the Browser Agent — Prompts
+
+Ask it these:
+
+- *"List my open tabs"*
+- *"Open https://gdg.community.dev and tell me what you see"*
+- *"Take a screenshot"*
+- *"Click the login button"*
+
+Watch your Chrome react in real time!
+
+---
+
+<!-- _backgroundImage: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%) -->
+
 # MCP — Connect to Everything
+
+---
+
+# What is MCP?
 
 **Model Context Protocol** — the universal plug for AI agents.
 
 Your ADK agent can **consume** MCP tools and **expose** itself as an MCP server.
-
-### What this means:
 
 ```
 Your Agent
@@ -360,22 +556,34 @@ Your Agent
    └── Any MCP server you want
 ```
 
-### Example: Google Workspace CLI
+---
 
-The `@googleworkspace/cli` has **49 MCP-compatible skills** — Gmail, Drive, Calendar, Sheets, Docs. Your agent can read your email and update your spreadsheets.
+# Example: Google Workspace CLI
+
+The `@googleworkspace/cli` has **49 MCP-compatible skills**:
+
+- **Gmail** — read, send, search emails
+- **Drive** — list, upload, share files
+- **Calendar** — create events, check availability
+- **Sheets** — read and update spreadsheets
+- **Docs** — read and create documents
+
+Your agent can read your email and update your spreadsheets.
+
+```bash
+npm i -g @googleworkspace/cli
+```
 
 ---
 
 # Sessions — Conversational Memory
 
-ADK agents remember context **within a conversation** using sessions.
+ADK agents remember context **within a conversation**.
 
 ```python
 from google.adk.sessions import InMemorySessionService
 
 session_service = InMemorySessionService()
-# Agent keeps context across multiple turns
-# Knows what you asked before, what tools returned
 ```
 
 ### What this enables:
@@ -385,31 +593,36 @@ session_service = InMemorySessionService()
 
 ### Coming soon:
 - **Long-term memory** across sessions (Memory Bank API)
-- Store user preferences, past interactions
-
-*Sessions + custom tools = personalization without complexity.*
+- Store user preferences and past interactions
 
 ---
 
-# Web App & Deployment Options
+<!-- _backgroundImage: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%) -->
+
+# Deployment
+
+---
+
+# Web App Options
 
 ### Option 1: ADK Web UI (Built-in)
 ```bash
-adk web --port 8000    # Chat UI + Visual Builder included
+adk web --port 8000
 ```
+Chat UI + Visual Builder — already included.
 
 ### Option 2: AG-UI Protocol (React App)
 ```bash
 npx copilotkit@latest create -f adk
 npm install && npm run dev
 ```
-Scaffolds a **React frontend** with streaming chat, shared state, and your ADK agent as backend.
+Scaffolds a React frontend with streaming chat.
 
 ### Option 3: API Server
 ```bash
 adk api_server kigali_agent --port 8080
 ```
-Exposes your agent as a REST API — connect any frontend.
+REST API — connect any frontend you want.
 
 ---
 
@@ -435,9 +648,9 @@ ADK Agent (Python)
    + Cloud Run (deployment)
 ```
 
-**Zero to production in 25 minutes.**
-
 ---
+
+<!-- _backgroundImage: linear-gradient(135deg, #e8f0fe 0%, #c6f6d5 100%) -->
 
 # What You Built Today
 
@@ -445,27 +658,26 @@ ADK Agent (Python)
 |------|-----|------|
 | Personalized AI assistant | 10 lines of Python | 5 min |
 | No-code agent | Visual Builder | 2 min |
-| Browser-controlling agent | ADK + Chrome CDP | 10 min |
-| API server / Web UI | `adk web` or `adk api_server` | 3 min |
-| Cloud deployment | `gcloud run deploy` | 5 min |
-
-**Total: ~25 minutes. All free. All open source.**
+| Custom tools | Python functions | 10 min |
+| Browser-controlling agent | ADK + Chrome CDP | 15 min |
+| Deployment | `adk web` / Cloud Run | 5 min |
 
 ---
 
 # Your Turn — Exercises
 
 ### Beginner
-1. Install ADK, get your API key
+1. Install ADK and get your free API key
 2. Build an agent with the Visual Builder
+3. Run the `kigali_agent` from the repo
 
 ### Intermediate
-3. Modify `kigali_agent` — add your own custom tool
-4. Try the browser agent with your Chrome
+4. Add your own custom tool to `kigali_agent`
+5. Try the browser agent with your Chrome
 
 ### Advanced
-5. Connect an MCP server to your agent
-6. Deploy to Cloud Run
+6. Connect an MCP server to your agent
+7. Deploy to Google Cloud Run
 
 **Code + study guide:** github.com/Timtech4u/build-with-ai-kigali
 
@@ -473,15 +685,14 @@ ADK Agent (Python)
 
 # Resources
 
-| | |
-|---|---|
+| Resource | Link |
+|----------|------|
 | **ADK Docs** | google.github.io/adk-docs/ |
 | **ADK GitHub** | github.com/google/adk-python |
 | **Free API Key** | aistudio.google.com/apikey |
 | **Chrome DevTools MCP** | github.com/AidenYuanDev/chrome-devtools-mcp |
-| **AG-UI Protocol** | docs.ag-ui.com |
 | **GWS CLI (MCP tools)** | github.com/googleworkspace/cli |
-| **Code + Study Guide** | github.com/Timtech4u/build-with-ai-kigali |
+| **This Repo** | github.com/Timtech4u/build-with-ai-kigali |
 
 ### Blog posts by Timothy
 - Building and Deploying AI Agents with Google ADK (Part 1 & 2)
@@ -489,7 +700,8 @@ ADK Agent (Python)
 
 ---
 
-<!-- _backgroundColor: #e8f0fe -->
+<!-- _backgroundImage: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 50%, #c6f6d5 100%) -->
+<!-- _paginate: false -->
 
 # Thank You!
 
@@ -501,5 +713,4 @@ timtech4u.dev | @timtech4u | github.com/Timtech4u
 
 *See you at Study Jam #2 on March 27!*
 
-*Slides, code, and study guide:*
 **github.com/Timtech4u/build-with-ai-kigali**
