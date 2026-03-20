@@ -9,6 +9,7 @@
 | **Venue** | Digital Transformation Center Rwanda, KG 541 St, Career Center 7th Floor, Kigali |
 | **Speaker** | [Timothy Olaleke](https://timtech4u.dev) — Google Developer Expert for Cloud |
 | **Slides** | [View Live Slides](https://timtech4u.dev/build-with-ai-kigali/slides/slides.html) |
+| **Live Agent** | [Try the Kigali Agent](https://kigali-agent-617693036026.us-central1.run.app/dev-ui/) |
 
 ---
 
