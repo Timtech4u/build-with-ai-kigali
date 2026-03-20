@@ -134,7 +134,7 @@ def run_javascript(code: str) -> dict:
 
 root_agent = Agent(
     name="browser_agent",
-    model="gemini-3-flash-preview",
+    model="gemini-2.5-flash",
     description="An AI agent that controls your Chrome browser via CDP.",
     instruction="""You are a browser control agent. You can open tabs, read page content,
 take screenshots, click elements, and run JavaScript — all in the user's real Chrome browser.

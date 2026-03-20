@@ -255,7 +255,7 @@ adk web --port 8000
 ```
 
 1. Click **+** to create an agent
-2. Pick **Gemini 3 Flash** as the model
+2. Pick **Gemini 2.5 Flash** as the model
 3. Write instructions in plain English
 4. Add tools from the catalog
 5. Test it live in the chat panel
@@ -272,7 +272,7 @@ from google.adk.tools import google_search
 
 root_agent = Agent(
     name="kigali_ai",
-    model="gemini-3-flash-preview",
+    model="gemini-2.5-flash",
     instruction=(
         "You are a helpful AI assistant for entrepreneurs "
         "in Kigali. Use Google Search for current data. "
@@ -374,7 +374,7 @@ def calculate_business_metrics(
 # The agent decides WHEN to call each tool
 root_agent = Agent(
     name="kigali_ai",
-    model="gemini-3-flash-preview",
+    model="gemini-2.5-flash",
     instruction="You are a business assistant for Kigali entrepreneurs.",
     tools=[convert_currency, calculate_business_metrics],
 )
@@ -463,7 +463,7 @@ Google launched **Chrome DevTools MCP** — an official MCP server with **29 bro
 ```python
 root_agent = Agent(
     name="browser_agent",
-    model="gemini-3-flash-preview",
+    model="gemini-2.5-flash",
     instruction="You control Chrome via CDP. Be concise.",
     tools=[
         list_tabs,        # See what's open
@@ -654,7 +654,7 @@ Your agent is **live on the internet**. Public URL. Free tier.
 
 ```
 ADK Agent (Python)
-   + Gemini 3 Flash (free API key)
+   + Gemini 2.5 Flash (free API key)
    + Custom tools (your code)
    + Chrome CDP (browser control)
    + MCP (external integrations)

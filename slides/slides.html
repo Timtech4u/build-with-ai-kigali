@@ -1289,7 +1289,7 @@ img {
 </code></pre>
 <ol>
 <li>Click <strong>+</strong> to create an agent</li>
-<li>Pick <strong>Gemini 3 Flash</strong> as the model</li>
+<li>Pick <strong>Gemini 2.5 Flash</strong> as the model</li>
 <li>Write instructions in plain English</li>
 <li>Add tools from the catalog</li>
 <li>Test it live in the chat panel</li>
@@ -1389,7 +1389,7 @@ img {
 
 root_agent = Agent(
     name=<span class="hljs-string">&quot;kigali_ai&quot;</span>,
-    model=<span class="hljs-string">&quot;gemini-3-flash-preview&quot;</span>,
+    model=<span class="hljs-string">&quot;gemini-2.5-flash&quot;</span>,
     instruction=(
         <span class="hljs-string">&quot;You are a helpful AI assistant for entrepreneurs &quot;</span>
         <span class="hljs-string">&quot;in Kigali. Use Google Search for current data. &quot;</span>
@@ -1899,7 +1899,7 @@ img {
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># The agent decides WHEN to call each tool</span>
 root_agent = Agent(
     name=<span class="hljs-string">&quot;kigali_ai&quot;</span>,
-    model=<span class="hljs-string">&quot;gemini-3-flash-preview&quot;</span>,
+    model=<span class="hljs-string">&quot;gemini-2.5-flash&quot;</span>,
     instruction=<span class="hljs-string">&quot;You are a business assistant for Kigali entrepreneurs.&quot;</span>,
     tools=[convert_currency, calculate_business_metrics],
 )
@@ -2588,7 +2588,7 @@ img {
 <h1 id="browser-agent--the-code">Browser Agent — The Code</h1>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python">root_agent = Agent(
     name=<span class="hljs-string">&quot;browser_agent&quot;</span>,
-    model=<span class="hljs-string">&quot;gemini-3-flash-preview&quot;</span>,
+    model=<span class="hljs-string">&quot;gemini-2.5-flash&quot;</span>,
     instruction=<span class="hljs-string">&quot;You control Chrome via CDP. Be concise.&quot;</span>,
     tools=[
         list_tabs,        <span class="hljs-comment"># See what&#x27;s open</span>
@@ -3597,7 +3597,7 @@ img {
 <p>Your agent is <strong>live on the internet</strong>. Public URL. Free tier.</p>
 <h3 id="the-full-stack">The full stack:</h3>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code>ADK Agent (Python)
-   + Gemini 3 Flash (free API key)
+   + Gemini 2.5 Flash (free API key)
    + Custom tools (your code)
    + Chrome CDP (browser control)
    + MCP (external integrations)

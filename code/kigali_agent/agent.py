@@ -65,7 +65,7 @@ def calculate_business_metrics(
 
 root_agent = Agent(
     name="kigali_ai",
-    model="gemini-3-flash-preview",
+    model="gemini-2.5-flash",
     instruction=(
         "You are a smart, friendly AI assistant for entrepreneurs and developers "
         "in Kigali, Rwanda. You help with business questions, currency conversions, "
