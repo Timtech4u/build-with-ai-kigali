@@ -7,7 +7,6 @@ Speaker: Timothy Olaleke, Google Developer Expert — Cloud
 import json
 import urllib.request
 from google.adk.agents import Agent
-from google.adk.tools import google_search
 
 
 def convert_currency(amount: float, from_currency: str, to_currency: str) -> dict:
@@ -73,8 +72,8 @@ root_agent = Agent(
         "market research, and technical topics.\n\n"
         "You speak English, French, and Kinyarwanda fluently.\n\n"
         "When asked about prices or costs, always convert to RWF for local context.\n"
-        "Use Google Search for current information about markets, trends, or regulations.\n"
+        "You answer questions using your knowledge about markets, trends, or regulations.\n"
         "Keep answers practical, actionable, and concise."
     ),
-    tools=[google_search, convert_currency, calculate_business_metrics],
+    tools=[convert_currency, calculate_business_metrics],
 )

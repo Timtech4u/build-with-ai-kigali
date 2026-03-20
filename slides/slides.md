@@ -80,6 +80,9 @@ style: |
     border-radius: 0 12px 12px 0;
     font-size: 1.05em;
   }
+  blockquote strong {
+    color: #ea4335;
+  }
   blockquote p { margin: 0; }
   img {
     border-radius: 10px;
@@ -245,6 +248,8 @@ If you see the ADK interface — you're ready!
 
 # Visual Builder — Zero Code
 
+> **▶ LIVE DEMO** — `./run.sh 1`
+
 ```bash
 adk web --port 8000
 ```
@@ -280,6 +285,8 @@ root_agent = Agent(
 ---
 
 # Run Your Agent
+
+> **▶ LIVE DEMO** — `./run.sh 2`
 
 ### File structure
 
@@ -326,7 +333,7 @@ def convert_currency(amount: float, from_cur: str, to_cur: str) -> dict:
 Add it to your agent:
 
 ```python
-tools=[google_search, convert_currency]
+tools=[convert_currency, calculate_business_metrics]
 ```
 
 *"Convert 500 USD to RWF" — and it just works.*
@@ -369,7 +376,7 @@ root_agent = Agent(
     name="kigali_ai",
     model="gemini-3-flash-preview",
     instruction="You are a business assistant for Kigali entrepreneurs.",
-    tools=[google_search, convert_currency, calculate_business_metrics],
+    tools=[convert_currency, calculate_business_metrics],
 )
 ```
 
@@ -456,7 +463,7 @@ Google launched **Chrome DevTools MCP** — an official MCP server with **29 bro
 ```python
 root_agent = Agent(
     name="browser_agent",
-    model="gemini-2.5-flash",
+    model="gemini-3-flash-preview",
     instruction="You control Chrome via CDP. Be concise.",
     tools=[
         list_tabs,        # See what's open
@@ -501,6 +508,8 @@ You: "Open gdg.community.dev and find upcoming events"
 
 # Try the Browser Agent — Setup
 
+> **▶ LIVE DEMO** — `./run.sh 3`
+
 ### Start Chrome with CDP:
 
 ```bash
@@ -522,6 +531,8 @@ adk run browser_agent
 ---
 
 # Try the Browser Agent — Prompts
+
+> **▶ LIVE DEMO** — `./run.sh 3`
 
 Ask it these:
 
@@ -627,6 +638,8 @@ REST API — connect any frontend you want.
 ---
 
 # Deploy to Cloud Run
+
+> **▶ LIVE DEMO** — show deployed URL
 
 ```bash
 gcloud run deploy kigali-agent \
