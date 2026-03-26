@@ -1,135 +1,106 @@
-# Build with AI: Study Jam #1 — GDG Kigali
+# Build with AI — GDG Kigali 2026
 
-> **Build an AI agent that controls your browser, searches the web, and converts currencies — in under 30 minutes. No experience needed.**
+> **A 2-part hands-on series: build AI agents that think, act, and speak.**
 
 | | |
 |---|---|
-| **Event** | Build with AI: Study Jam #1 |
-| **Date** | Friday, March 20, 2026 at 6:00 PM EAT |
+| **Event** | Build with AI — GDG Cloud Kigali |
 | **Venue** | Digital Transformation Center Rwanda, KG 541 St, Career Center 7th Floor, Kigali |
 | **Speaker** | [Timothy Olaleke](https://timtech4u.dev) — Google Developer Expert for Cloud |
-| **Slides** | [View Live Slides](https://timtech4u.dev/build-with-ai-kigali/slides/slides.html) |
-| **Live Agent** | [Try the Kigali Agent](https://kigali-agent-617693036026.us-central1.run.app/dev-ui/) |
+| **Participants** | ~150 per session |
 
 ---
 
-## What You'll Learn
+## Sessions
 
-In this hands-on study jam, you'll build **real AI agents** that can:
+### Study Jam #1 — AI Agents (March 20, 2026)
 
-1. **Search the web** and answer questions using Google Search
-2. **Convert currencies** with live exchange rates (USD to RWF and more)
-3. **Control your Chrome browser** — open tabs, read pages, click buttons, take screenshots
-4. **Deploy to the cloud** with a single command
+**Topic:** Building Personalized AI Agents with Gemini, ADK, and MCP
 
-All of this using **Google's Agent Development Kit (ADK)** and **Gemini** — completely free, no credit card needed.
+Build text-based AI agents that search the web, convert currencies, control Chrome, and deploy to the cloud.
+
+- **Slides:** [View online](https://timtech4u.dev/build-with-ai-kigali/slides/slides.html) | [`slides/slides.html`](slides/slides.html)
+- **Code:** [`code/`](code/) (kigali_agent, browser_agent)
+- **Run:** `./run.sh` (demos 1-3)
+
+### Study Jam #2 — Voice AI (March 27, 2026)
+
+**Topic:** Building Real-Time Voice AI with Gemini 3.1 Flash Live
+
+Give your agents a voice. Real-time audio streaming, 30 HD voices, multi-turn conversations, function calling with voice.
+
+- **Slides:** [View online](https://timtech4u.dev/build-with-ai-kigali/slides/studyjam2.html) | [`slides/studyjam2.html`](slides/studyjam2.html)
+- **Code:** [`studyjam2-demos/`](studyjam2-demos/) (5 Python demos)
+- **Run:** `./run.sh voice` (demos v1-v5)
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+```bash
+# Python 3.10+
+python3 --version
+
+# Get a free API key from https://aistudio.google.com/apikey
+export GOOGLE_API_KEY="your-key-here"
+```
+
+### Clone and run
+
+```bash
+git clone https://github.com/Timtech4u/build-with-ai-kigali.git
+cd build-with-ai-kigali
+```
+
+#### Study Jam #1 (Text Agents)
+```bash
+pip install google-adk
+./run.sh 1    # Visual Builder (adk web)
+./run.sh 2    # Kigali Agent (CLI)
+./run.sh 3    # Browser Agent (CLI)
+```
+
+#### Study Jam #2 (Voice AI)
+```bash
+pip install google-genai
+./run.sh v1   # Hello Gemini — hear the AI speak
+./run.sh v2   # Voice Gallery — compare 4 voices
+./run.sh v3   # Conversation — AI remembers across turns
+./run.sh v4   # Interactive — audience types, AI responds with voice
+./run.sh v5   # Function Calling — voice agent with tools
+```
 
 ---
 
 ## What's In This Repo
 
-| Folder | What's Inside | Who It's For |
-|--------|--------------|--------------|
-| [`slides/`](slides/) | Presentation slides ([view online](https://timtech4u.dev/build-with-ai-kigali/slides/slides.html)) | Everyone |
-| [`study-materials/`](study-materials/) | Step-by-step study guide + cheat sheet | Self-study after the event |
-| [`code/kigali_agent/`](code/kigali_agent/) | Your first AI agent — 10 lines of Python | Beginners |
-| [`code/browser_agent/`](code/browser_agent/) | AI agent that controls Chrome | Intermediate |
-| [`DEMO-GUIDE.md`](DEMO-GUIDE.md) | Live demo walkthrough | Speakers / self-learners |
-
----
-
-## Get Started (5 Minutes)
-
-### What You Need
-- **Python 3.10+** installed on your computer
-- A **Gmail account** (for the free API key)
-- That's it!
-
-### Step 1: Install Google ADK
-
-```bash
-pip install google-adk
 ```
-
-### Step 2: Get Your Free API Key
-
-1. Go to [Google AI Studio](https://aistudio.google.com/apikey)
-2. Sign in with your Gmail
-3. Click **"Create API Key"** — copy it
-
-### Step 3: Set Your Key
-
-```bash
-export GOOGLE_API_KEY="paste_your_key_here"
+build-with-ai-kigali/
+├── README.md                  ← You are here
+├── run.sh                     ← Demo launcher (both sessions)
+│
+├── slides/
+│   ├── slides.md / .html      ← Study Jam #1 slides (Marp)
+│   ├── studyjam2.md / .html   ← Study Jam #2 slides (Marp)
+│   └── img/                   ← Screenshots for slides
+│
+├── code/                      ← Study Jam #1 code
+│   ├── kigali_agent/          ← Text agent with tools
+│   └── browser_agent/         ← Chrome-controlling agent
+│
+├── studyjam2-demos/           ← Study Jam #2 code
+│   ├── demo_hello.py          ← Basic Live API connection + audio
+│   ├── demo_voices.py         ← Compare 4 voices side by side
+│   ├── demo_conversation.py   ← Multi-turn with memory
+│   ├── demo_interactive.py    ← Audience-driven prompts
+│   └── demo_function_calling.py ← Voice + tools (weather, currency)
+│
+├── study-materials/           ← Self-study guides
+├── DEMO-GUIDE.md              ← Live demo walkthrough
+└── AGENTS.md                  ← Agent architecture notes
 ```
-
-### Step 4: Run Your First Agent
-
-```bash
-git clone https://github.com/Timtech4u/build-with-ai-kigali.git
-cd build-with-ai-kigali/code/kigali_agent
-adk run kigali_agent
-```
-
-Try asking it:
-- *"What is the population of Kigali?"*
-- *"Convert 500 USD to RWF"*
-- *"I have revenue of 50000, costs of 35000, and 200 customers. How's my business?"*
-
-### Step 5: Try the Visual Builder (No Code)
-
-```bash
-adk web --port 8000
-```
-
-Open http://localhost:8000 — drag, drop, and build agents visually!
-
----
-
-## The Browser Agent (The Cool Part)
-
-Want your AI to control your actual Chrome browser? Start Chrome with debugging enabled:
-
-```bash
-# macOS
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --remote-debugging-port=9222
-
-# Linux
-google-chrome --remote-debugging-port=9222
-
-# Windows
-chrome.exe --remote-debugging-port=9222
-```
-
-Then run the browser agent:
-
-```bash
-cd code/browser_agent
-pip install requests websocket-client
-adk run browser_agent
-```
-
-Try:
-- *"List my open tabs"*
-- *"Open https://gdg.community.dev and tell me what's on the page"*
-- *"Take a screenshot"*
-
-Your AI agent can now see and interact with your real browser!
-
----
-
-## Exercises
-
-After the study jam, try these challenges:
-
-| Level | Challenge |
-|-------|-----------|
-| Beginner | Build an agent using only the Visual Builder |
-| Beginner | Add a weather tool using the [wttr.in API](https://wttr.in) |
-| Intermediate | Add a new custom tool to `kigali_agent` |
-| Intermediate | Make the browser agent fill out a form |
-| Advanced | Connect an [MCP server](https://github.com/modelcontextprotocol) to your agent |
-| Advanced | Deploy your agent to [Google Cloud Run](https://cloud.google.com/run) |
 
 ---
 
@@ -137,18 +108,16 @@ After the study jam, try these challenges:
 
 | Resource | Link |
 |----------|------|
-| ADK Documentation | [google.github.io/adk-docs](https://google.github.io/adk-docs/) |
-| ADK GitHub | [github.com/google/adk-python](https://github.com/google/adk-python) |
-| Free API Key | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
-| Gemini Developer Guide | [ai.google.dev/gemini-api/docs](https://ai.google.dev/gemini-api/docs) |
-| Chrome DevTools Protocol | [chromedevtools.github.io/devtools-protocol](https://chromedevtools.github.io/devtools-protocol/) |
-| Google Workspace CLI (MCP) | [github.com/googleworkspace/cli](https://github.com/googleworkspace/cli) |
+| **Google AI Studio** | [aistudio.google.com](https://aistudio.google.com) |
+| **Voice Library (30 voices)** | [aistudio.google.com/apps/bundled/voice-library](https://aistudio.google.com/apps/bundled/voice-library) |
+| **Live API Docs** | [ai.google.dev/gemini-api/docs/live](https://ai.google.dev/gemini-api/docs/live) |
+| **ADK Docs** | [google.github.io/adk-docs](https://google.github.io/adk-docs/) |
+| **Gemini API** | [ai.google.dev/gemini-api/docs](https://ai.google.dev/gemini-api/docs) |
 
 ### Blog Posts
 - [Building and Deploying AI Agents with Google's ADK — Part 1](https://timtech4u.medium.com/building-and-deploying-ai-agents-in-minutes-with-googles-adk-part-1-abbf2ed43486)
 - [Enhancing Agents with Multimodal Capabilities: ADK + MCP — Part 2](https://timtech4u.medium.com/enhancing-agents-with-multimodal-capabilities-adk-mcp-part-2-of-3-25d6eb243d42)
-- [Building AI Agents with Google ADK, FastAPI, and MCP](https://dev.to/timtech4u/building-ai-agents-with-google-adk-fastapi-and-mcp-26h7)
-- [Multi-Tenant AI Customer Support with Google ADK](https://timtech4u.medium.com/usebelha-multi-tenant-ai-customer-support-with-google-adk-5b46e2575f25)
+- [Your Browser Has a Remote Control — And Nobody Told You](https://dev.to/timtech4u/your-browser-has-a-remote-control-and-nobody-told-you-5e97)
 
 ---
 
