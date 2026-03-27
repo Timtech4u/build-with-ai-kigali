@@ -69,8 +69,7 @@ By the end of today, you'll know how to build a voice AI that talks to people --
 | 6 | Choose a voice & personality | 15 min |
 | 7 | Voice AI for Africa | 15 min |
 | 8 | What you can build | 10 min |
-| 9 | Getting started & resources | 10 min |
-| 10 | Q&A | remaining |
+| 9 | Getting started, resources & Q&A | 20 min |
 
 ---
 
@@ -582,7 +581,7 @@ async with client.aio.live.connect(
     # Audio streams back automatically
 ```
 
-*Recognize this? It's what AI Studio generates. We just added a voice and transcription.*
+*This is what AI Studio generates -- we just added a voice and transcription.*
 
 ---
 
@@ -661,10 +660,9 @@ You talk to it like a person, and it **remembers** like a person.
 | **Aoede** | Breezy, light | Casual conversation |
 | **Sulafat** | Warm | Healthcare, care apps |
 | **Fenrir** | Excitable | Games, entertainment |
-| **Achird** | Friendly | Customer service |
-| **Gacrux** | Mature | Authority, narration |
-| **Sadachbia** | Lively | Youth, social apps |
 | **Zephyr** | Bright | General purpose |
+
+*Plus 23 more: Achird, Gacrux, Sadachbia, Leda, Orus...*
 
 ---
 
@@ -724,19 +722,14 @@ config = types.LiveConnectConfig(
 
 # Give It a Personality
 
-### The **voice** controls how it sounds.
-### The **system instruction** controls what it says and how it behaves.
+**Voice** = how it sounds. **System instruction** = what it says and how it behaves.
 
 ```python
-system_instruction = """
-You are Amani, a friendly tour guide in Kigali.
-You love sharing stories about Rwanda's culture and history.
-Keep your responses short -- just 1-2 sentences.
-Always suggest one interesting place to visit.
-"""
+system_instruction = """You are Amani, a friendly Kigali tour guide.
+Keep responses short -- 1-2 sentences. Suggest a place to visit."""
 ```
 
-### Examples of personalities:
+### Match personality to use case:
 
 | Name | Role | Voice |
 |------|------|-------|
@@ -757,17 +750,11 @@ Just type it in the **"System instructions"** box on the right panel.
 config = types.LiveConnectConfig(
     response_modalities=[types.Modality.AUDIO],
     system_instruction=types.Content(
-        parts=[types.Part(text="""
-            You are Amani, a friendly Kigali tour guide.
-            Speak with warmth and enthusiasm about Rwanda.
-            Keep responses under 2 sentences.
-        """)]
+        parts=[types.Part(text="You are Amani, a friendly Kigali tour guide...")]
     ),
     speech_config=types.SpeechConfig(
         voice_config=types.VoiceConfig(
-            prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                voice_name="Aoede"
-            )
+            prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Aoede")
         )
     ),
 )
@@ -845,11 +832,10 @@ config = types.LiveConnectConfig(
 | Problem Today | Voice AI Solution |
 |---------------|------------------|
 | Patients can't describe symptoms in English | **Voice intake** in Kinyarwanda or Swahili |
-| Farmers don't know market prices | **Ask by voice**: "What's the price of maize today?" |
-| Banking is confusing on small screens | **Voice banking**: "Send 5000 francs to Jean" |
+| Farmers don't know market prices | **Ask by voice**: "Price of maize today?" |
+| Banking confusing on small screens | **Voice banking**: "Send 5000 francs to Jean" |
 | Students struggle without tutors | **AI tutor** that speaks their language |
-| Businesses can't afford 24/7 support | **Voice agents** that answer calls anytime |
-| Delivery drivers need hands-free updates | **Voice check-in**: "Package delivered to Kimironko" |
+| No 24/7 support | **Voice agents** that answer calls anytime |
 
 ---
 
@@ -863,12 +849,9 @@ config = types.LiveConnectConfig(
 |-----------|--------------|
 | **Accents** | Kigali French ≠ Paris French ≠ Dakar French |
 | **Code-mixing** | "Ndashaka kumenya price ya avocado" (Kinyarwanda + English) |
-| **Network drops** | What happens when the connection is lost mid-sentence? |
+| **Network drops** | What happens when connection is lost mid-sentence? |
 | **Cost** | Users are cost-sensitive -- optimize for affordability |
-| **"Who speaks first?"** | If your agent calls someone, it should greet first |
-| **Noise** | Busy markets, moto traffic, shared spaces |
-
-*These are **design** challenges, not code problems. Think about them early.*
+| **Noise & "who speaks first?"** | Busy markets, moto traffic; agent should greet first |
 
 ---
 
@@ -897,10 +880,12 @@ config = types.LiveConnectConfig(
 | **The Home Depot** | Voice-guided shopping -- ask about products |
 | **Stitch** | Design tool -- AI talks about what it sees on screen |
 | **Ato** | Multilingual companion for elderly people |
-| **LiveKit** | Platform for building voice/video AI apps |
-| **Pipecat** | Framework for real-time voice chatbots |
 
-### Partner platforms that make building easier:
+---
+
+# Partner Platforms
+
+### Making it easier to build voice AI:
 
 | Platform | What It Offers |
 |----------|---------------|
@@ -1074,19 +1059,16 @@ Copy it, paste it, run it. Done.
 
 | What | Limit |
 |------|-------|
-| **Session length** | 15 minutes per connection (can reconnect) |
-| **Context window** | 128,000 tokens of conversation memory |
+| **Session length** | 15 min per connection (can reconnect) |
+| **Context window** | 128K tokens of conversation memory |
 | **Response type** | Text **OR** Audio (choose one per session) |
-| **Voices** | 30 HD voices |
-| **Languages** | 90+ |
+| **Voices / Languages** | 30 HD voices, 90+ languages |
 | **Free tier** | Available for testing and prototyping |
-| **Video + audio** | 2 minutes per session |
 
-### Tips for beginners:
+### Tips:
 - **Use headphones** when testing with mic (prevents echo)
 - **Start in AI Studio** before writing code
-- **Keep API keys secret** -- never in public code
-- **Start simple** -- get "Hello" working first
+- **Start simple** -- get "Hello" working first, then add features
 
 ---
 
@@ -1096,13 +1078,11 @@ Copy it, paste it, run it. Done.
 |----------|-----------------|
 | **Get API Key** | aistudio.google.com |
 | **Try Voice AI Live** | aistudio.google.com/live |
-| **Listen to All 30 Voices** | aistudio.google.com/apps/bundled/voice-library |
-| **Live API Documentation** | ai.google.dev/gemini-api/docs/live |
-| **Capabilities Guide** | ai.google.dev/gemini-api/docs/live-guide |
-| **Official Code Examples** | github.com/google-gemini/gemini-live-api-examples |
-| **Google ADK (from Study Jam #1)** | google.github.io/adk-docs |
-| **Today's Demo Code** | github.com/Timtech4u/build-with-ai-kigali |
-| **Study Jam #1 Slides** | timtech4u.dev/build-with-ai-kigali |
+| **All 30 Voices** | aistudio.google.com/apps/bundled/voice-library |
+| **Live API Docs** | ai.google.dev/gemini-api/docs/live |
+| **Code Examples** | github.com/google-gemini/gemini-live-api-examples |
+| **Today's Code + Slides** | github.com/Timtech4u/build-with-ai-kigali |
+| **Google ADK** | google.github.io/adk-docs |
 
 ---
 
@@ -1124,16 +1104,14 @@ Copy it, paste it, run it. Done.
 # What We Learned Today
 
 ### Study Jam #1 (last week):
-- Built agents that can **think and act**
-- Added **tools** (currency, metrics, browser)
+- Built agents that can **think and act** with tools
 - **Deployed** to the cloud
 
 ### Study Jam #2 (today):
 - Made agents **speak and listen** in real-time
 - Tried it in **AI Studio** -- no code needed
-- Heard **30 different voices**
-- Learned about **Voice AI for Africa** -- 90+ languages
-- Saw how to **combine voice + tools** for complete agents
+- Heard **30 different voices**, learned about **Voice AI for Africa**
+- Combined **voice + tools** for complete agents
 
 ### Key message:
 **You don't need to be an expert to build voice AI.**
